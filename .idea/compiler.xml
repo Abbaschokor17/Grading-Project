@@ -8,13 +8,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="student-service" />
-        <module name="doctor-service" />
+        <module name="jury-module" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jury-service" target="16" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="doctor-service" options="-parameters" />
+      <module name="jury-module" options="-parameters" />
+      <module name="jury-service" options="-parameters" />
       <module name="microservices-project" options="" />
       <module name="student-service" options="-parameters" />
     </option>

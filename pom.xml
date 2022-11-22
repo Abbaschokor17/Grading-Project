@@ -18,7 +18,8 @@
 
     <modules>
         <module>student-service</module>
-        <module>doctor-service</module>
+
+        <module>jury-module</module>
     </modules>
 
     <properties>
