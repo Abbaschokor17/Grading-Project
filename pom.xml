@@ -20,6 +20,7 @@
         <module>student-service</module>
 
         <module>jury-module</module>
+        <module>group-service</module>
     </modules>
 
     <properties>
