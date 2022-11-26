@@ -12,6 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 public class  GroupRequest {
     private String GroupUniqueNumber;
-
     private List<GroupLineStudentsDto> groupLineStudentsDtoList;
 }
