@@ -18,9 +18,9 @@
 
     <modules>
         <module>student-service</module>
-
         <module>jury-module</module>
         <module>group-service</module>
+        <module>check-service</module>
     </modules>
 
     <properties>
