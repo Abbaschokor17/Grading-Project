@@ -23,6 +23,7 @@
         <module>check-service</module>
         <module>grade-service</module>
         <module>discovery-server</module>
+        <module>api-gateway</module>
     </modules>
 
     <properties>
