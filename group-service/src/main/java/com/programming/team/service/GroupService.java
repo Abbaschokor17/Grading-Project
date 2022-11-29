@@ -1,5 +1,6 @@
 package com.programming.team.service;
 
+import com.programming.team.dto.CheckResponse;
 import com.programming.team.dto.GroupLineStudentsDto;
 import com.programming.team.dto.GroupRequest;
 import com.programming.team.dto.GroupResponse;
@@ -10,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +26,7 @@ import java.util.UUID;
 public class GroupService {
 
     private final GroupRepository groupRepository;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeGroup(GroupRequest groupRequest) {
 
@@ -34,8 +39,24 @@ public class GroupService {
                 .toList();
         group.setGroupLineStudentsList(groupLineStudents);
 
-        groupRepository.save(group);
+        List<String> matricules = group.getGroupLineStudentsList().stream().map(GroupLineStudents::getMatricule).toList();
+
+        CheckResponse[] checkResponseArray = webClientBuilder.build().get()
+                .uri("http://check-service/api/check",
+                        uriBuilder -> uriBuilder.queryParam("matricule", matricules).build())
+                .retrieve()
+                .bodyToMono(CheckResponse[].class)
+                .block();
+       boolean allStudentsAreRegister = Arrays.stream(checkResponseArray).allMatch(CheckResponse::isItStudent);
+
+
+        if(allStudentsAreRegister){
+            groupRepository.save(group);
+        } else {
+            throw new IllegalArgumentException("student is not in registered, please try again later");
+        }
     }
+
 
     private GroupLineStudents mapToDto(GroupLineStudentsDto groupLineStudentsDto) {
         GroupLineStudents groupLineStudents = new GroupLineStudents();

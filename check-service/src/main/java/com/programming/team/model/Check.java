@@ -21,4 +21,5 @@ public class Check {
     private Long id;
     private String matricule;
     private String fullnamestudent;
+    private Integer present;
 }

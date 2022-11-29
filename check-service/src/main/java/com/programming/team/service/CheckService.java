@@ -1,9 +1,12 @@
 package com.programming.team.service;
 
+import com.programming.team.dto.CheckResponse;
 import com.programming.team.repository.CheckRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -13,7 +16,9 @@ public class CheckService {
     private final CheckRepository checkRepository;
 
     @Transactional(readOnly = true)
-    public boolean isitRegisterInOurData(String matricule) {
-        return checkRepository.findByMatricule(matricule).isPresent();
+    public List<CheckResponse> isitRegisterInOurData(List<String> matricule) {
+        return checkRepository.findByMatriculeIn(matricule).stream().map(check ->
+            CheckResponse.builder().matricule(check.getMatricule()).isItStudent(check.getPresent()>0).build()
+        ).toList();
     }
 }
