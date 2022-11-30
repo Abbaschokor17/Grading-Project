@@ -52,6 +52,7 @@ public class GroupService {
 
         if(allStudentsAreRegister){
             groupRepository.save(group);
+
         } else {
             throw new IllegalArgumentException("student is not in registered, please try again later");
         }
