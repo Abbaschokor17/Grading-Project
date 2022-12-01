@@ -4,11 +4,13 @@ import com.programming.team.dto.CheckResponse;
 import com.programming.team.dto.GroupLineStudentsDto;
 import com.programming.team.dto.GroupRequest;
 import com.programming.team.dto.GroupResponse;
+import com.programming.team.event.GroupPlacedEvent;
 import com.programming.team.model.Group;
 import com.programming.team.model.GroupLineStudents;
 import com.programming.team.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -27,6 +29,8 @@ public class GroupService {
 
     private final GroupRepository groupRepository;
     private final WebClient.Builder webClientBuilder;
+
+    private final KafkaTemplate<String,GroupPlacedEvent> kafkaTemplate;
 
     public void placeGroup(GroupRequest groupRequest) {
 
@@ -52,6 +56,7 @@ public class GroupService {
 
         if(allStudentsAreRegister){
             groupRepository.save(group);
+            kafkaTemplate.send("notificationTopic", new GroupPlacedEvent(group.getGroupUniqueNumber()));
 
         } else {
             throw new IllegalArgumentException("student is not in registered, please try again later");
