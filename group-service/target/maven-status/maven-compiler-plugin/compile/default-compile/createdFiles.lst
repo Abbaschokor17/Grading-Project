@@ -1,0 +1,14 @@
+com\programming\team\config\WebClientConfig.class
+com\programming\team\model\GroupLineStudents.class
+com\programming\team\dto\CheckResponse.class
+com\programming\team\controller\GroupController.class
+com\programming\team\model\Group.class
+com\programming\team\repository\GroupRepository.class
+com\programming\team\dto\CheckResponse$CheckResponseBuilder.class
+com\programming\team\event\GroupPlacedEvent.class
+com\programming\team\GroupServiceApplication.class
+com\programming\team\service\GroupService.class
+com\programming\team\dto\GroupLineStudentsDto.class
+com\programming\team\dto\GroupResponse$GroupResponseBuilder.class
+com\programming\team\dto\GroupResponse.class
+com\programming\team\dto\GroupRequest.class

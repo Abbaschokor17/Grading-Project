@@ -1,0 +1,10 @@
+com\programming\team\dto\JuryResponse$JuryResponseBuilder.class
+com\programming\team\dto\JuryRequest$JuryRequestBuilder.class
+com\programming\team\dto\JuryResponse.class
+com\programming\team\JuryServiceApplication.class
+com\programming\team\model\Jury.class
+com\programming\team\dto\JuryRequest.class
+com\programming\team\service\JuryService.class
+com\programming\team\controller\JuryController.class
+com\programming\team\model\Jury$JuryBuilder.class
+com\programming\team\repository\JuryRepository.class
